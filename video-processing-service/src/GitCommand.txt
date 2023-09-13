@@ -1,0 +1,93 @@
+git checkout main
+git add .
+git commit -m "Commit message describing the changes"
+git push origin main
+
+To restore a previous version of your project on GitHub, you can use `git reset` to reset your local repository to a specific commit, and then force push this change to the remote repository. Here's how you can do it step by step:
+
+### Step 1: Identify the Commit Hash
+
+First, identify the commit hash of the version you want to restore. You can view the commit history using the following command:
+
+```sh
+git log
+```
+
+This will show a list of previous commits along with their hashes (a long string of numbers and letters). Find the hash of the commit you want to restore to.
+
+### Step 2: Reset Your Local Repository
+
+Once you have identified the commit hash, reset your local repository to that commit using the following command (replace `commit_hash` with the actual hash):
+
+```sh
+git reset --hard commit_hash
+```
+
+### Step 3: Force Push to the Remote Repository
+
+After resetting your local repository, force push the changes to the remote repository using the following command:
+
+```sh
+git push -f origin main
+```
+
+**Warning**: This operation is destructive and cannot be undone. It will erase the commit history on the remote repository from the reset point onwards. Make sure to consult with your team (if applicable) before performing a force push, as it can cause issues with other people's work.
+
+### Alternative: Revert the Commit
+
+An alternative and safer approach is to revert the changes introduced by the commits you want to undo, creating a new commit that undoes those changes. You can do this using the following command (replace `commit_hash` with the actual hash):
+
+```sh
+git revert commit_hash..HEAD
+```
+
+This will create a new commit that undoes the changes introduced between the specified commit and the latest commit. You can then push this new commit to the remote repository as usual:
+
+```sh
+git push origin main
+```
+
+This approach is safer because it preserves the commit history, making it easier to track changes and collaborate with others.
+
+From the log output, you have two recent commits in your `main` branch. If you want to restore your repository to the state it was in at the "Description of the changes made" commit (the second commit in the log), you can use its hash `0a9d491ab904c7a8680a5567da2bb55df83714b4`.
+
+Here are the steps to restore to that version:
+
+### Step 1: Checkout to the Desired Commit
+
+You can checkout to that commit using the following command:
+
+```sh
+git checkout 0a9d491ab904c7a8680a5567da2bb55df83714b4
+```
+
+Now your working directory will reflect the state of the project at that commit.
+
+### Step 2: Create a New Branch (Optional)
+
+It's a good practice to create a new branch when you checkout to a previous commit, to avoid detaching the HEAD. You can create a new branch and switch to it using:
+
+```sh
+git checkout -b branch_name
+```
+
+Replace `branch_name` with a descriptive name for the new branch.
+
+### Step 3: Push the Changes to the Remote Repository
+
+If you want to update the `main` branch on the remote repository to this state, you first need to reset the `main` branch to this commit and then force push it. Here's how you can do it:
+
+```sh
+# Switch back to the main branch
+git checkout main
+
+# Reset the main branch to the desired commit
+git reset --hard 0a9d491ab904c7a8680a5567da2bb55df83714b4
+
+# Force push the changes to the remote repository
+git push -f origin main
+```
+
+**Warning**: This operation is destructive and cannot be undone. It will erase the commit history on the remote repository from the reset point onwards. Be sure this is what you want before proceeding.
+
+If everything looks good, you have successfully restored your project to a previous state.
