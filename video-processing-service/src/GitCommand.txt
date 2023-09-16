@@ -1,3 +1,5 @@
+Upload use this dir: Jerry@LAPTOP-BMNH8ID1 MINGW64 ~/OneDrive - University of Southern California/Desktop/Full_Stack_API/Youtube_Clone (main)
+
 git checkout main
 git add .
 git commit -m "Commit message describing the changes"
