@@ -1,6 +1,6 @@
 // 1. GCS file interactions
 
-import { Storage } from '@google-cloud/Storage';
+import { Storage } from '@google-cloud/storage';
 import fs from 'fs'
 import ffmpeg from 'fluent-ffmpeg';
 
