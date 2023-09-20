@@ -33,12 +33,15 @@ gcloud run deploy video-processing-service --image us-central1-docker.pkg.dev/yt
   --max-instances=1 \
   --ingress=internal
 
+########################################## RUN ROW BY ROW ##############################################
 
 gsutil mb -l us-central1 --pap=enforced gs://jc12-yt-raw-videos
+
 gsutil notification create -t video-uploads-topic -f json -e OBJECT_FINALIZE gs://jc12-yt-raw-videos
+
 gsutil mb -l us-central1 gs://jc12-yt-processed-videos
 
-
+########################################## RUN ROW BY ROW ##############################################
 
 # Create raw videos bucket
 gsutil mb -l us-central1 --pap=enforced gs://jc0102-yt-raw-videos
