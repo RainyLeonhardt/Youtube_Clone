@@ -1,0 +1,52 @@
+gcloud services enable artifactregistry.googleapis.com
+
+(Optional) Update gcloud components
+
+gcloud components update
+
+Create an Artifact Registry repository:
+
+gcloud artifacts repositories create video-processing-repo \
+  --repository-format=docker \
+  --location=us-central1 \
+  --description="Docker repository for video processing service"
+
+docker build -t video-processing-service .
+
+docker images
+
+docker build -t us-central1-docker.pkg.dev/yt-clone-399523/video-processing-repo/video-processing-service .
+
+docker push us-central1-docker.pkg.dev/yt-clone-399523/video-processing-repo/video-processing-service
+
+# Enable cloud run
+gcloud services enable run.googleapis.com
+
+# Deploy container to cloud run
+gcloud run deploy video-processing-service --image us-central1-docker.pkg.dev/yt-clone-399523/video-processing-repo/video-processing-service \
+  --region=us-central1 \
+  --platform managed \
+  --timeout=3600 \
+  --memory=2Gi \
+  --cpu=1 \
+  --min-instances=0 \
+  --max-instances=1 \
+  --ingress=internal
+
+
+gsutil mb -l us-central1 --pap=enforced gs://jc12-yt-raw-videos
+gsutil notification create -t video-uploads-topic -f json -e OBJECT_FINALIZE gs://jc12-yt-raw-videos
+gsutil mb -l us-central1 gs://jc12-yt-processed-videos
+
+
+
+# Create raw videos bucket
+gsutil mb -l us-central1 --pap=enforced gs://jc0102-yt-raw-videos
+
+# Configure bucket to send file upload notifications to Pub/Sub topic
+gsutil notification create -t video-uploads-topic -f json -e OBJECT_FINALIZE gs://jc0102-yt-raw-videos
+
+# Create processed videos bucket
+gsutil mb -l us-central1 gs://jc0102-yt-processed-videos
+
+gsutil notification create -t <topic-name> -f json -e OBJECT_FINALIZE gs://jc0102-yt-raw-videos
