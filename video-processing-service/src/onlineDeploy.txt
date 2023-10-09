@@ -44,12 +44,12 @@ gsutil mb -l us-central1 gs://jc12-yt-processed-videos
 ########################################## RUN ROW BY ROW ##############################################
 
 # Create raw videos bucket
-gsutil mb -l us-central1 --pap=enforced gs://jc0102-yt-raw-videos
+gsutil mb -l us-central1 --pap=enforced gs://jc-jt-raw-videos
 
 # Configure bucket to send file upload notifications to Pub/Sub topic
-gsutil notification create -t video-uploads-topic -f json -e OBJECT_FINALIZE gs://jc0102-yt-raw-videos
+gsutil notification create -t video-uploads-topic -f json -e OBJECT_FINALIZE gs://jc-jt-raw-videos
 
 # Create processed videos bucket
-gsutil mb -l us-central1 gs://jc0102-yt-processed-videos
+gsutil mb -l us-central1 gs://jc-jt-processed-videos
 
 gsutil notification create -t <topic-name> -f json -e OBJECT_FINALIZE gs://jc0102-yt-raw-videos
