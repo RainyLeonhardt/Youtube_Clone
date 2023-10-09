@@ -21,13 +21,13 @@ const auth = getAuth(app);
  */
 export function signInWithGoogle() {
     return signInWithPopup(auth, new GoogleAuthProvider());
-}
+  }
 
 /**
  * Signs the use out.
  * @returns A promise that resolves with the user's credentials
  */
-export function signOutWithGoogle() {
+export function signOut() {
     return auth.signOut();
 }
 
