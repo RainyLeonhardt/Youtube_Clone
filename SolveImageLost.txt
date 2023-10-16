@@ -1,0 +1,3 @@
+run local at local 3000 port, find the cache folder in .next folder, copy it and then clean the file also run the npm run build.
+
+After the new .next folder built, paste the cache back and the images will be seen.
