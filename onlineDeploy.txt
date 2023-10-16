@@ -15,9 +15,9 @@ docker build -t video-processing-service .
 
 docker images
 
-docker build -t us-central1-docker.pkg.dev/yt-clone-399523/video-processing-repo/video-processing-service .
+docker build -t us-central1-docker.pkg.dev/jc-yt-d5558/video-processing-repo/video-processing-service .
 
-docker push us-central1-docker.pkg.dev/yt-clone-399523/video-processing-repo/video-processing-service
+docker push us-central1-docker.pkg.dev/jc-yt-d5558/video-processing-repo/video-processing-service
 
 # Enable cloud run
 gcloud services enable run.googleapis.com

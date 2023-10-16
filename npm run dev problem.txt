@@ -1,1 +1,2 @@
+run at cd: Jerry@LAPTOP-BMNH8ID1 MINGW64 ~/OneDrive - University of Southern California/Desktop/Full_Stack_API/Youtube_Clone/yt-web-client-src
 rm -rf .next
